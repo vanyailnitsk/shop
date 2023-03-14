@@ -35,18 +35,25 @@ public class BasketService {
         return basketRepository.save(basket);
     }
 
-    public List<Device> getItems(Principal principal)  {
-        List<Device> items = userRepository.findByEmail(principal.getName()).getBasket().getItems();
+    public List<Device> getItems(String username)  {
+        List<Device> items = userRepository.findByEmail(username).getBasket().getItems();
         return items;
     }
 
     @Transactional
-    public Basket addItem(Integer basketId,Integer deviceId) {
-        Basket basket = basketRepository.findById(basketId)
-                .orElseThrow(()-> new IllegalStateException("No basket with  id "+basketId));
-        Device device = deviceRepository.findById(deviceId)
-                .orElseThrow(()->new IllegalStateException("No device with id "+deviceId));
-        basket.addItem(device);
-        return basketRepository.save(basket);
+    public Basket addItem(String username,Integer deviceId) {
+        Basket basket = userRepository.findByEmail(username).getBasket();
+        List<Device> items =  basket.getItems();
+        items.add(deviceRepository.findById(deviceId).orElseThrow(()->new IllegalStateException("No device with id"+deviceId)));
+        return basket;
     }
+//    @Transactional
+//    public Basket addItem(Integer basketId,Integer deviceId) {
+//        Basket basket = basketRepository.findById(basketId)
+//                .orElseThrow(()-> new IllegalStateException("No basket with  id "+basketId));
+//        Device device = deviceRepository.findById(deviceId)
+//                .orElseThrow(()->new IllegalStateException("No device with id "+deviceId));
+//        basket.addItem(device);
+//        return basketRepository.save(basket);
+//    }
 }

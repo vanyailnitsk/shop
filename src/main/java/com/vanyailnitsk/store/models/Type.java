@@ -13,8 +13,22 @@ public class Type {
     @GeneratedValue
     private Integer id;
     private String name;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Type() {
+    }
+
+    public Type(String name,String url) {
+        this.name = name;
+        this.url=url;
     }
 
     public Integer getId() {

@@ -14,6 +14,18 @@ public class Brand {
     private Integer id;
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Brand(String name) {
+        this.name = name;
+    }
+
     public Brand() {
     }
 

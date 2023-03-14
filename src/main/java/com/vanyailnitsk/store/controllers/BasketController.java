@@ -4,6 +4,8 @@ import com.vanyailnitsk.store.models.Basket;
 import com.vanyailnitsk.store.models.Device;
 import com.vanyailnitsk.store.services.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -19,13 +21,19 @@ public class BasketController {
         this.basketService = basketService;
     }
 
-    @PostMapping("")
-    public Basket addItem(@RequestParam(name = "basket") Integer basketId, @RequestParam(name = "device") Integer deviceId) {
-        return basketService.addItem(basketId,deviceId);
+//    @PostMapping("")
+//    public Basket addItem(@RequestParam(name = "basket") Integer basketId, @RequestParam(name = "device") Integer deviceId) {
+//        return basketService.addItem(basketId,deviceId);
+//    }
+    @PostMapping("add/{deviceId}")
+    public Basket addItem(@PathVariable("deviceId") Integer deviceId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return basketService.addItem(authentication.getName(),deviceId);
     }
 
     @GetMapping("items")
-    public List<Device> getItems(Principal principal) {
-        return basketService.getItems(principal);
+    public List<Device> getItems() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return basketService.getItems(authentication.getName());
     }
 }

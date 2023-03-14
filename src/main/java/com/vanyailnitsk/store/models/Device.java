@@ -16,8 +16,16 @@ public class Device {
     @Transient
     private Double rating;
     private String image;
-    private Integer typeId;
-    private Integer brandId;
+
+    @ManyToOne
+    @JoinColumn(name="type_id")
+    @JsonIgnore
+    private Type type;
+
+    @ManyToOne
+    @JoinColumn(name="brand_id")
+    @JsonIgnore
+    private Brand brand;
     @ManyToMany(mappedBy = "items",fetch = FetchType.LAZY)
     @JsonIgnore
     public List<Basket> basket;
@@ -25,13 +33,11 @@ public class Device {
     public Device() {
     }
 
-    public Device(String name, Integer price, Double rating, String image, Integer typeId, Integer brandId) {
+    public Device(String name, Integer price, Double rating, String image) {
         this.name = name;
         this.price = price;
         this.rating = rating;
         this.image = image;
-        this.typeId = typeId;
-        this.brandId = brandId;
     }
 
     public Integer getDeviceId() {
@@ -85,19 +91,19 @@ public class Device {
         this.image = image;
     }
 
-    public Integer getTypeId() {
-        return typeId;
+    public Type getType() {
+        return type;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public Integer getBrandId() {
-        return brandId;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setBrandId(Integer brandId) {
-        this.brandId = brandId;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 }

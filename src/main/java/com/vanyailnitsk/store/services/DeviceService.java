@@ -24,6 +24,15 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
+    public List<Device> getAllByBrand(Integer brandId) {
+        return deviceRepository.findByBrandId(brandId);
+    }
+
+    public List<Device> getAllByTypeUrl(String typeUrl) {
+        return deviceRepository.findByTypeUrl(typeUrl);
+    }
+
+
     public Device createDevice(Device device) {
         return deviceRepository.save(device);
     }

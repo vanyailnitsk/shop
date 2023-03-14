@@ -22,9 +22,20 @@ public class DeviceController {
         return deviceService.getDevice(id);
     }
 
+
     @GetMapping("all")
     public List<Device> getAllDevices() {
         return deviceService.getAll();
+    }
+
+    @GetMapping("/brand/{id}")
+    public List<Device> getAllByBrandId(@PathVariable("id") Integer brandId) {
+        return deviceService.getAllByBrand(brandId);
+    }
+
+    @GetMapping("type/{id}")
+    public List<Device> getAllByTypeId(@PathVariable("id") String typeUrl) {
+        return deviceService.getAllByTypeUrl(typeUrl);
     }
 
     @PostMapping("create")
