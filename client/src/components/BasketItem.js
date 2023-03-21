@@ -1,16 +1,15 @@
 import React from "react";
 import { Button, Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { basketAddDevice } from "../http/deviceAPI";
 import { DEVICE_ROUTE } from "../utils/consts";
 // import {useHistory} from 'react-router-dom'
-const DeviceItem = ({device}) => {
+const BasketItem = ({device}) => {
     const navigate = useNavigate()
     return (
-        <Card  className="mt-2 p-3 shadow border-white">
+        <Card  className="mt-2 p-3 shadow-sm border-white">
             
             <div className="d-flex justify-content-between align-items-center">
-                <Card.Img variant="left" height={150}  className="pt-2 pb-2" src={device.image}/>
+                <Card.Img variant="left" height={100}  className="pt-2 pb-2" src={device.image}/>
                 <Card.Body>
                     <Card.Title 
                         onClick={() => navigate(DEVICE_ROUTE+'/'+device.deviceId)}
@@ -18,16 +17,11 @@ const DeviceItem = ({device}) => {
                     >
                         {device.name}</Card.Title>
                 </Card.Body>
-                <div className="p-1">{device.price+' ₽'}</div>
+                <div className="p-1"><h5>{device.price+' ₽'}</h5></div>
                 {/* <div>{device.rating}</div> */}
-                <Button
-                    variant="outline-primary"
-                    className="pt-1"
-                    onClick={() => basketAddDevice(device.deviceId)}
-                >Купить</Button>
             </div>
         
         </Card>
     )
 }
-export default DeviceItem; 
+export default BasketItem; 

@@ -15,8 +15,6 @@ const Shop = observer(() => {
             device.setDevices(data)
         })
     }, [])
-    console.log(device.types)
-    console.log(type)
     return (
         
         <Container>

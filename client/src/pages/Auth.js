@@ -9,11 +9,12 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import { login, registration } from '../http/userAPI';
 
-const Auth = () => {
+const Auth = observer( () => {
     const {user} = useContext(Context)
     const location = useLocation()
     const navigate = useNavigate()
     const isLogin = location.pathname === LOGIN_ROUTE
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -23,10 +24,12 @@ const Auth = () => {
             if (isLogin) {
                 data = await login(email, password);
             } else {
-                data = await registration(email, password);
+                data = await registration(name, email, password);
             }
-            user.setUser(user)
+            user.setUser(data)
             user.setIsAuth(true)
+            navigate(SHOP_ROUTE)
+            console.log(user)
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -39,14 +42,23 @@ const Auth = () => {
             <Card style={{width: 600}} className="p-5">
                 <h2 className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
                 <Form className="d-flex flex-column">
+                    {!isLogin ? 
                     <Form.Control
                         className="mt-3"
-                        placeholder="Введите ваш email..."
+                        placeholder="Имя"
+                        onChange={e => setName(e.target.value)}
+                    ></Form.Control> : <h1></h1>}
+                    <Form.Control
+                        className="mt-3"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <Form.Control
                         className="mt-3"
-                        placeholder="Введите ваш пароль..."
+                        placeholder="Пароль"
                         type="password"
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
@@ -71,5 +83,5 @@ const Auth = () => {
             </Card>
         </Container>
     );
-}
+})
 export default Auth; 

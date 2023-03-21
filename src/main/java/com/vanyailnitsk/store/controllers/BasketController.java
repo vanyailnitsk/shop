@@ -34,6 +34,7 @@ public class BasketController {
     @GetMapping("items")
     public List<Device> getItems() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
         return basketService.getItems(authentication.getName());
     }
 }

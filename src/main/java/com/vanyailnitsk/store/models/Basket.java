@@ -34,6 +34,7 @@ public class Basket {
     private List<Device> items = new ArrayList<>();
 
     public Basket() {
+        this.items = new ArrayList<>();
     }
 
     public Basket(Integer basketId, List<Device> items) {

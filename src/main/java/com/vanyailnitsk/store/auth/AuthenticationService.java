@@ -7,7 +7,9 @@ import com.vanyailnitsk.store.configs.security.JwtService;
 import com.vanyailnitsk.store.models.User;
 import com.vanyailnitsk.store.models.enums.Role;
 import com.vanyailnitsk.store.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -66,6 +68,7 @@ public class AuthenticationService {
                 .build();
         tokenRepository.save(token);
     }
+
 
     private void revokeAllUserTokens(User user) {
         var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUserId());

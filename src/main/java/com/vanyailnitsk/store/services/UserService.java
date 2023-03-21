@@ -29,10 +29,9 @@ public class UserService {
     @Transactional
     public User createUser(User user) {
         Basket basket = basketRepository.save(new Basket());
-        basket.setUser(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User user1 = userRepository.save(user);
-        basketRepository.save(basket);
+        basket.setUser(user1);
         return user1;
     }
     @Transactional

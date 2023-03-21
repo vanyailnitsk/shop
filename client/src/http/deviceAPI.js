@@ -11,6 +11,16 @@ export const fetchDevices = async (type) => {
 }
 
 export const fetchOneDevice = async (id) => {
-    const {data} = await $authHost.get('devices/' + id)
+    const {data} = await $host.get('devices/' + id)
+    return data
+}
+
+export const fetchBasketItems = async () => {
+    const{data} = await $authHost.get('basket/items')
+    return data
+}
+
+export const basketAddDevice = async (deviceId) => {
+    const {data} = await $authHost.post('basket/add/'+deviceId)
     return data
 }

@@ -38,8 +38,8 @@ public class SecurityConfig {
                                 .requestMatchers("/profile/**","api/basket/**").hasRole("USER")
                                 .anyRequest().permitAll())
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .httpBasic(Customizer.withDefaults());
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                //.httpBasic(Customizer.withDefaults());
         return http.build();
     }
     @Bean

@@ -2,6 +2,8 @@ package com.vanyailnitsk.store.auth.token;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.vanyailnitsk.store.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
