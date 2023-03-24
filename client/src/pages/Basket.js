@@ -16,13 +16,14 @@ const Basket = () => {
             setLen(user.basket.length)
         })
       }, [])
+      document.body.style.backgroundColor = '#f6f6f6';
     return (
         <Container>
             <div className="d-flex flex-row align-items-center">
             <h2 className="p-3">Корзина</h2>
             <h6>{len+' товара'}</h6></div>
             <Row>
-                <Col md={9}>
+                <Col md={7} className="ms-5">
                     <BasketList/>
                 </Col>
             </Row>

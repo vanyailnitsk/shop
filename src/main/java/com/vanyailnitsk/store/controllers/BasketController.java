@@ -30,6 +30,11 @@ public class BasketController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return basketService.addItem(authentication.getName(),deviceId);
     }
+    @PostMapping("remove/{deviceId}")
+    public Basket removeItem(@PathVariable("deviceId") Integer deviceId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return basketService.deleteItem(authentication.getName(),deviceId);
+    }
 
     @GetMapping("items")
     public List<Device> getItems() {

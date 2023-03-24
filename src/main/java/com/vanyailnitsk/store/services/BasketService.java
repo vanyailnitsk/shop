@@ -36,7 +36,6 @@ public class BasketService {
     }
 
     public List<Device> getItems(String username)  {
-        System.out.println(username);
         List<Device> items = userRepository.findByEmail(username).getBasket().getItems();
         return items;
     }
@@ -46,6 +45,13 @@ public class BasketService {
         Basket basket = userRepository.findByEmail(username).getBasket();
         List<Device> items =  basket.getItems();
         items.add(deviceRepository.findById(deviceId).orElseThrow(()->new IllegalStateException("No device with id"+deviceId)));
+        return basket;
+    }
+    @Transactional
+    public Basket deleteItem(String username,Integer deviceId) {
+        Basket basket = userRepository.findByEmail(username).getBasket();
+        List<Device> items =  basket.getItems();
+        items.remove(deviceRepository.findById(deviceId).orElseThrow(()->new IllegalStateException("No device with id"+deviceId)));
         return basket;
     }
 }

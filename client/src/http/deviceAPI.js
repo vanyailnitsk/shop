@@ -24,3 +24,8 @@ export const basketAddDevice = async (deviceId) => {
     const {data} = await $authHost.post('basket/add/'+deviceId)
     return data
 }
+
+export const basketRemoveDevice = async (deviceId) => {
+    const {data} = await $authHost.post('basket/remove/'+deviceId)
+    return data
+}

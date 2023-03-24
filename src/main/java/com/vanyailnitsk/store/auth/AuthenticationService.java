@@ -4,8 +4,10 @@ import com.vanyailnitsk.store.auth.token.Token;
 import com.vanyailnitsk.store.auth.token.TokenRepository;
 import com.vanyailnitsk.store.auth.token.TokenType;
 import com.vanyailnitsk.store.configs.security.JwtService;
+import com.vanyailnitsk.store.models.Basket;
 import com.vanyailnitsk.store.models.User;
 import com.vanyailnitsk.store.models.enums.Role;
+import com.vanyailnitsk.store.repositories.BasketRepository;
 import com.vanyailnitsk.store.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -23,19 +25,24 @@ import java.util.Set;
 public class AuthenticationService {
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
+    private final BasketRepository basketRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationProvider authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        Basket basket = new Basket();
         var user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(Set.of(Role.ROLE_USER))
+                .basket(basket)
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
+        basket.setUser(user);
+        basketRepository.save(basket);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

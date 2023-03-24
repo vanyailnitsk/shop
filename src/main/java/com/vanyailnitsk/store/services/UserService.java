@@ -2,6 +2,7 @@ package com.vanyailnitsk.store.services;
 
 import com.vanyailnitsk.store.models.Basket;
 import com.vanyailnitsk.store.models.User;
+import com.vanyailnitsk.store.models.enums.Role;
 import com.vanyailnitsk.store.repositories.BasketRepository;
 import com.vanyailnitsk.store.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,13 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
-        Basket basket = basketRepository.save(new Basket());
+        Basket basket = new Basket();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User user1 = userRepository.save(user);
-        basket.setUser(user1);
-        return user1;
+        user.getRoles().add(Role.ROLE_USER);
+        user.setBasket(basket);
+        basket.setUser(user);
+        basketRepository.save(basket);
+        return userRepository.save(user);
     }
     @Transactional
     public User createUser1(User user) {

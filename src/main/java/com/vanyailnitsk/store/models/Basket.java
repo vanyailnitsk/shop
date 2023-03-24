@@ -1,6 +1,7 @@
 package com.vanyailnitsk.store.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Basket {
     private Integer basketId;
     @OneToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
     @Override
@@ -30,7 +31,6 @@ public class Basket {
             joinColumns = { @JoinColumn(name = "basket_id") },
             inverseJoinColumns = { @JoinColumn(name = "device_id"),}
     )
-    //@JoinColumn(name = "item_id")
     private List<Device> items = new ArrayList<>();
 
     public Basket() {

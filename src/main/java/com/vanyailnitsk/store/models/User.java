@@ -35,7 +35,6 @@ public class User implements UserDetails {
     }
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private Basket basket;
 
     public Set<Role> getRoles() {
@@ -53,6 +52,15 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     public User(String name, String email, String password) {

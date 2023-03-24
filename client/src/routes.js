@@ -10,16 +10,17 @@ import { ADMIN_ROUTE, BASKET_ROUTE, DEVICE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGIS
     {
         path: ADMIN_ROUTE,
         Component: Admin
-    },
-    {
-        path: BASKET_ROUTE,
-        Component: Basket
     }
+
  ]
  export const publicRoutes = [
     {
         path: SHOP_ROUTE + '/:type',
         Component: Shop
+    },
+    {
+        path: BASKET_ROUTE,
+        Component: Basket
     },
     {
         path: DEVICE_ROUTE + '/:id',

@@ -50,7 +50,7 @@ public class TestConfig {
             Device device4 = new Device("Apple MacBook Pro 14 2021 M1", 120000, 8.0, "https://ipac31.ru/image/cache/data/product/mac/MacBook%20Pro%2014/macbook-pro-14-space-gray-2-700x700.png");
             User user = new User("Ivan", "vanya", passwordEncoder.encode("pass"));
             user.setRoles(Set.of(Role.ROLE_ADMIN,Role.ROLE_USER));
-            Basket basket = basketService.createBasket(new Basket(1,new ArrayList<>()));
+            Basket basket = basketService.createBasket(new Basket());
             device.setBrand(brand);
             device.setType(type);
 

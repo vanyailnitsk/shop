@@ -43,7 +43,7 @@ const NavBar = observer(() => {
           {user.isAuth ?
             <Nav classname="ml-auto">
               <Nav.Link onClick={() => navigate(ADMIN_ROUTE)}>Admin</Nav.Link>
-              <Nav.Link onClick={() => navigate(BASKET_ROUTE)}>Корзина</Nav.Link>
+              <Nav.Link href={BASKET_ROUTE}>Корзина</Nav.Link>
               <Button variant={"outline-light"} className="ml-3">
                 Профиль
               </Button>
