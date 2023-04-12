@@ -12,7 +12,7 @@ const DeviceItem = ({device}) => {
     //     setButtonText("В корзине")
     // }
     return (
-        <Card  className="mt-2 p-3 shadow border-white">
+        <Card  className="mt-2 p-3 shadow-sm border-white">
             
             <div className="d-flex justify-content-between align-items-center">
                 <Card.Img variant="left" height={150}  className="pt-3 pb-2" src={device.image}/>

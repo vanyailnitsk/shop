@@ -2,6 +2,7 @@ package com.vanyailnitsk.store.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vanyailnitsk.store.models.enums.Role;
+import com.vanyailnitsk.store.models.order.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -36,6 +38,17 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private Basket basket;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public Set<Role> getRoles() {
         return roles;

@@ -29,3 +29,8 @@ export const basketRemoveDevice = async (deviceId) => {
     const {data} = await $authHost.post('basket/remove/'+deviceId)
     return data
 }
+
+export const fetchOrders = async () => {
+    const {data} = await $authHost.get('order/all')
+    return data
+}

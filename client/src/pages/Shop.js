@@ -4,7 +4,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Context } from "..";
 import DeviceList from "../components/DeviceList";
-import TypeBar from "../components/TypeBar";
 import { fetchDevices, fetchTypes } from "../http/deviceAPI";
 
 const Shop = observer(() => {
@@ -23,7 +22,6 @@ const Shop = observer(() => {
                 <h2>{type.name} </h2>
             )}
                 <Col md={3}>
-                    <TypeBar/>
                 </Col>
                 <Col md={9}>
                     {/* <BrandBar/> */}

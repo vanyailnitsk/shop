@@ -4,12 +4,17 @@ import Basket from "./pages/Basket"
 import DevicePage from "./pages/DevicePage"
 import Home from "./pages/Home"
 import Shop from "./pages/Shop"
-import { ADMIN_ROUTE, BASKET_ROUTE, DEVICE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./utils/consts"
+import Profile from './pages/Profile'
+import { ADMIN_ROUTE, BASKET_ROUTE, DEVICE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, ORDERS_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./utils/consts"
 
  export const authRoutes =[
     {
         path: ADMIN_ROUTE,
         Component: Admin
+    },
+    {
+        path: ORDERS_ROUTE,
+        Component : Profile
     }
 
  ]

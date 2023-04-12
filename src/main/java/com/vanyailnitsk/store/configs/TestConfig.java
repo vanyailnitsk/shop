@@ -2,6 +2,7 @@ package com.vanyailnitsk.store.configs;
 
 import com.vanyailnitsk.store.models.*;
 import com.vanyailnitsk.store.models.enums.Role;
+import com.vanyailnitsk.store.models.order.Order;
 import com.vanyailnitsk.store.services.*;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -23,17 +26,20 @@ public class TestConfig {
 
     private final TypeService typeService;
     private final BrandService brandService;
+    private final OrderService orderService;
 
     @Autowired
     public TestConfig(UserService userService, DeviceService deviceService,
                       PasswordEncoder passwordEncoder, BasketService basketService,
-                      TypeService typeService,BrandService brandService) {
+                      TypeService typeService,BrandService brandService,
+                      OrderService orderService) {
         this.userService = userService;
         this.deviceService = deviceService;
         this.passwordEncoder = passwordEncoder;
         this.basketService = basketService;
         this.typeService = typeService;
         this.brandService = brandService;
+        this.orderService = orderService;
     }
 
 
@@ -69,8 +75,14 @@ public class TestConfig {
             deviceService.createDevice(device2);
             deviceService.createDevice(device3);
             deviceService.createDevice(device4);
+
+            Order order = new Order();
+            order.setUser(user);
+            order.setItems(List.of(device,device2));
+            order.setDate(LocalDate.now());
             userService.createUser1(user);
             basketService.createBasket(basket);
+            orderService.createOrder(order);
             System.out.println(basketService.getBasket(1).getItems());
         };
     }

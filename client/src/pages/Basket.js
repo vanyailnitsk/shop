@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Row,Col, Container } from "react-bootstrap";
+import { Row,Col, Container, Card } from "react-bootstrap";
 import { Context } from "..";
 import BasketList from "../components/BasketList";
+import BasketOrder from "../components/BasketOrder";
 import DeviceItem from "../components/DeviceItem";
 import DeviceList from "../components/DeviceList";
 import { fetchBasketItems } from "../http/deviceAPI";
 
 const Basket = () => {
-    const {device} = useContext(Context)
     const {user} = useContext(Context)
     const [len,setLen] = useState()
     useEffect(() => {
@@ -16,17 +16,19 @@ const Basket = () => {
             setLen(user.basket.length)
         })
       }, [])
-      document.body.style.backgroundColor = '#f6f6f6';
     return (
-        <Container>
+        <Container className="d-flex justify-content-between mt-3">
+            <Card className="d-flex flex-column mt-3 border-white shadow-sm" style={{width:'65%',borderRadius:'16px'}}>
             <div className="d-flex flex-row align-items-center">
-            <h2 className="p-3">Корзина</h2>
+            <h3 className="p-3">Корзина</h3>
             <h6>{len+' товара'}</h6></div>
             <Row>
-                <Col md={7} className="ms-5">
+                <Col className="ms-3 me-3">
                     <BasketList/>
                 </Col>
             </Row>
+            </Card>
+                <BasketOrder itemsAmount={len}/>
         </Container>
     )
 }

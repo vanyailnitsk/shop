@@ -32,4 +32,8 @@ export default class DeviceStore {
     get selectedType() {
         return this._selectedType
     }
+    sum(key) {
+        console.log(this.devices)
+        return this._devices.reduce((a, b) => a + (b[key] || 0), 0);
+    }
 }
